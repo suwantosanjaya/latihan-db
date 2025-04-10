@@ -17,9 +17,8 @@
 
     $result = $stmt->fetchAll();
 
-    // echo json_encode($result);
-    
     ?>
+    <a href="mhs-form.php">Tambah Data</a>
     <table border=1>
         <tr>
             <th>No</th>
@@ -28,6 +27,7 @@
             <th>Tempat Lahir</th>
             <th>Tanggal Lahir</th>
             <th>Jenis Kelamin</th>
+            <th>Action</th>
         </tr>
         <?php
         $no = 1;
@@ -39,11 +39,20 @@
             echo "<td>" . $row["tempat_lahir"] . "</td>";
             echo "<td>" . $row["tgl_lahir"] . "</td>";
             echo "<td>" . $row["jk"] . "</td>";
+            echo "<td><a href='#' onClick=confirmDelete('" . $row["nim"] . "')>Hapus</a></td>";
             echo "</tr>";
             $no++;
         }
         ?>
     </table>
+    <script>
+        function confirmDelete(nim) {
+            $tanya = confirm("Anda yakin ingin menghapus data ini?");
+            if ($tanya == true) {
+                window.location.href = "mhs-hapus.php?nim=" + nim;
+            }
+        }
+    </script>
 </body>
 
 </html>
